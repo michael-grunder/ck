@@ -109,6 +109,7 @@ generate()
  	    -e "s#@HEADERS@#$HEADERS#g"				\
 	    -e "s#@LIBRARY@#$LIBRARY#g"				\
 	    -e "s#@PREFIX@#$PREFIX#g"				\
+	    -e "s#@EXEC_WRAPPER#$EXEC_WRAPPER#g"                \
 	    -e "s#@CORES@#$CORES#g"				\
 	    -e "s#@ALL_LIBS@#$ALL_LIBS#g"			\
 	    -e "s#@INSTALL_LIBS@#$INSTALL_LIBS#g"		\
@@ -713,7 +714,7 @@ int main(void) {
 EOF
 
 $CC -o .1 .1.c
-COMPILER=`./.1 2> /dev/null`
+COMPILER=$($EXEC_WRAPPER ./.1 2> /dev/null)
 r=$?
 rm -f .1.c .1
 
